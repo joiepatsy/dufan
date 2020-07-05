@@ -18,7 +18,7 @@ base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+"\\"
 def getvideos():
 	base_length = len(base)+12
 	videolist = []
-	for path in pathlib.Path(base+"data/videos").iterdir():
+	for path in pathlib.Path("data/videos").iterdir():
 		path = str(path)
 		videolist.append(path[base_length:])
 	return videolist
