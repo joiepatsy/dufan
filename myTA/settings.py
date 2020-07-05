@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'myTA.urls'
@@ -120,4 +121,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/data/videos/'
-MEDIA_ROOT = 'data/videos'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'data/videos')
