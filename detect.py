@@ -11,12 +11,9 @@ import pathlib
 from data import jp
 from yolo_v3 import Yolo_v3
 from utils import load_images, load_class_names, draw_boxes, draw_frame
-import os
 
 # menonaktifkan eager execution
 tf.compat.v1.disable_eager_execution()
-
-base = os.path.dirname(os.path.realpath(__file__)) + '/'
 
 # fungsi inti
 def main(vi):
@@ -28,7 +25,7 @@ def main(vi):
 	_MAX_OUTPUT_SIZE = 20
 	iou_threshold=0.5
 	confidence_threshold=0.5
-	class_names = load_class_names(base+'data/labels/coco.names')
+	class_names = load_class_names('data/labels/coco.names')
 	n_classes = len(class_names)    
 	
 	# variabel yang akan menyimpan jumlah kendaraaan pada seluruh frame yang dideteksi
@@ -50,7 +47,7 @@ def main(vi):
 
 	# mengambil id deteksi saat ini dengan cara menghitung jumlah deteksi yang telah dilakukan sebelumnya
 	IDDetection = 1
-	for path in pathlib.Path(base + "tf/static/detections").iterdir():
+	for path in pathlib.Path("tf/static/detections").iterdir():
 		if path.is_file():
 			IDDetection += 1
 
@@ -61,7 +58,7 @@ def main(vi):
 	saver = tf.compat.v1.train.Saver(tf.compat.v1.global_variables(scope='yolo_v3_model'))
 	with tf.compat.v1.Session() as sess:
 		# mengambil pretrain model yolov3 yang telah dikonversi ke dalam model tensorflow
-		saver.restore(sess, base + 'weights/model.ckpt')
+		saver.restore(sess, 'weights/model.ckpt')
 
 		# mengambil frame dari file video dan mengambil informasi tentang file video
 		cap = cv2.VideoCapture(vi)
@@ -73,7 +70,7 @@ def main(vi):
 		file_duration = frame_count/fps
 		minutes = round(file_duration/60)
 		seconds = round(file_duration%60)
-		out = cv2.VideoWriter(base + 'tf/static/detections/result-'+str(IDDetection)+'.mp4', fourcc, fps,
+		out = cv2.VideoWriter('./tf/static/detections/result-'+str(IDDetection)+'.mp4', fourcc, fps,
                               (int(frame_size[0]), int(frame_size[1])))		
 
 		    # teknik untuk melakukan deteksi pada setiap 160 frame dalam file video
@@ -109,7 +106,7 @@ def main(vi):
 						trucks+=truck
 						motors+=motor
 						# menyimpan frame yang dilakukan proses deteksi
-						cv2.imwrite(base + "tf/static/frames/frame-"+str(frm2)+"."+str(frm)+"."+str(IDDetection)+".png", frame)
+						cv2.imwrite("tf/static/frames/frame-"+str(frm2)+"."+str(frm)+"."+str(IDDetection)+".png", frame)
 						frm2+=1
 				# menampilkan pop up window proses deteksi
 				cv2.imshow('Tugas Akhir - Joie', frame)
@@ -123,8 +120,6 @@ def main(vi):
 			cv2.destroyAllWindows()
 			cap.release()
 			# menyimpan hasil deteksi
-			base_length = len(base)+12
-			vi = vi[base_length:]
 			datatxttemp = ',{"id": "'+str(IDDetection)+'","file_name": "'+str(vi)+'", "date": "'+now+'", "duration": "'+str(minutes)+':'+str(seconds)+'", "cars": "'+str(cars)+'", "truck": "'+str(trucks)+'", "bus": "'+str(buss)+'", "motor": "'+str(motors)+'"}]'
 			datatxt = datatxt+datatxttemp
 			joie.save(datatxt)
