@@ -1,0 +1,12 @@
+[
+	{
+		"id": "0",
+		"file_name": "-",
+		"date": "-",
+		"duration": "-",
+		"cars": "-",			
+		"truck": "-",			
+		"bus": "-",
+		"motor": "-"			
+	}
+]

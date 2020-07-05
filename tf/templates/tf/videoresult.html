@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tugas Akhir : 16021106116</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<meta name="author" content="Dufan Joie Patsy Manajang | 16021106116">
+	<meta name="description" content="Implementasi Tensorflow Object Detection Dalam Mengklasifikasi Jenis Kendaraan Mobil">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css?family=Quicksand|Lacquer|Anton|Odibee+Sans&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/id/a/ad/Logo_unsrat.png">
+	<style>
+		* {
+			margin: 0px;
+			padding: 0px;
+			color: #555;
+			font-family: sans-serif;			
+		}
+		img {
+			width: 100%;
+			height: 100%;
+		}
+		.header {
+
+		}
+		.subheader1 {
+			padding: 20px 190px;
+			font-size: 23px;
+			border-bottom: 1px solid silver;
+			display: flex;
+			justify-content: space-between;		
+			align-items: center;	
+		}
+		.subheader1 .nama {
+			font-family: 'Anton';
+			margin-right: 10px;
+		}
+		.subheader1 .nim {
+			font-family: 'Odibee Sans';
+		}
+		.subheader1 .logo {
+			width: 50px;
+			height: 50px;
+		}
+		.subheader2 {
+			width: 100%;
+			height: 360px;
+			background: url(https://www.unsrat.ac.id/assets/images/logo-unsrat/ktr_pusat3.png);
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: bottom;
+			opacity: .8;			
+			margin-bottom: 60px;
+		}
+		.result {
+			padding: 60px 100px;
+			background: #565656;
+			position: relative;
+		}
+		.result * {
+			color: #eee;
+		}
+		.result .p_result {
+			text-align: center;
+			font-size: 29px;
+			font-family: Quicksand;
+			margin-top: 60px;
+			text-transform: capitalize;
+		}
+		.result #video {
+			padding: 10%;
+			box-sizing: border-box;
+		}
+		.result video {
+			box-shadow: 4px 4px 6px black;
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+ 	<div class="container">
+ 		<div class="header">
+ 			<div class="subheader1">
+ 				<div class="me"><span class="nama">DUFAN MANAJANG</span><span class="nim">16021106116</span></div><div class="logo"><img src="https://www.unsrat.ac.id/assets/images/logo-unsrat/logoBL-gray.png"></div>
+ 			</div>
+ 			<div class="subheader2"></div>
+ 		</div>
+ 		<div class="result">
+ 			<div class="p_result">~ video for detection result {{id}} ~</div>
+ 			<div id="video">
+	 			<video controls>
+	 				<source src="{% static videopath %}" type="video/mp4">
+	 			</video>
+ 			</div>
+ 		</div> 		 		
+ 	</div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+web: gunicorn myTA.wsgi --log-file -
