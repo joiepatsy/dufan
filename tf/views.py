@@ -24,7 +24,7 @@ def getvideos():
 	return videolist
 
 def index(req):
-	with open(base+"data.txt") as json_file:
+	with open("data.txt") as json_file:
 		data = json.load(json_file)
 	videos = getvideos()
 	return render(req, 'tf/index.html', {'data': data, 'videos': videos})
